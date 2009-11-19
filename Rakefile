@@ -10,6 +10,7 @@ begin
     gem.email = "roy@roywblack.com"
     gem.homepage = "http://github.com/roywblack/git-fogbugz"
     gem.authors = ["Roy W. Black"]
+    gem.add_dependency('grit', '>= 2.0.0')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
