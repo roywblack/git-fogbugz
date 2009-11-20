@@ -39,7 +39,7 @@ require 'grit'
 include Grit
 
 class App
-  VERSION = '0.0.1'
+  VERSION = '0.1.1'
   
   attr_reader :options
 
@@ -53,17 +53,15 @@ class App
     @options.quiet = false
     @options.quiet = false
     @options.passthrough = false
-    @options.repo = "C:/clients/MattMuresan/source/scenengine"
+    @options.repo = "."
     # TO DO - add additional defaults
-    @options.host = "https://onebrave.fogbugz.com"
-    @options.port = 443
-    @options.repo_id = 4
+    @options.host = "https://example.fogbugz.com"
+    @options.repo_id = 99
     
   end
 
   # Parse options, check arguments, then process the command
   def run
-    
     if parsed_options? && arguments_valid? 
       
       $stderr.puts "Start at #{DateTime.now}\n\n" if @options.verbose
@@ -78,31 +76,33 @@ class App
     else
       output_usage
     end
-    
   end
   
   protected
   
   def parsed_options?
-    opts = OptionParser.new do |opts|
+    @opts = OptionParser.new do |opts|
       opts.banner = <<BANNER
-Usage: git-fogbugz [options]
+Usage: git-fogbugz [options] fogbugz_server fogbugz_repo_id
+
+Expects standard input such as sent to the git post-receive hook.
+See http://www.kernel.org/pub/software/scm/git/docs/githooks.html#post-receive
+
+Example: git-fogbugz https://example.fogbugz.com 9 < file_with_old_new_ref_lines
 
 Options are:
 BANNER
       opts.separator ""
-      opts.on_tail('-r', '--repo=REPO')    {|repo| @options.repo = repo }
+      opts.on_tail('-r', '--repo=REPO', "FogBugz repo id")    {|repo| @options.repo = repo }
       opts.on_tail('-v', '--version')    { output_version ; exit 0 }
       opts.on_tail('-V', '--verbose')    { @options.verbose = true }  
       opts.on_tail('-q', '--quiet')      { @options.quiet = true }
-      opts.on('-p', '--passthrough'){ @options.passthrough = true }
+      opts.on('-p', '--passthrough', "Output stdin"){ @options.passthrough = true }
 
-      opts.on_tail('-h', '--help')       { output_version; puts opts }
+      opts.on_tail('-h', '--help')       { output_version; puts opts; exit 0 }
     end
     opts.parse!(@arguments) rescue return false
     process_options
-    true
-
   end
 
   # Performs post-parse processing on options
@@ -121,13 +121,13 @@ BANNER
   # True if required arguments were provided
   def arguments_valid?
     # TO DO - implement your real logic here
-    #true if @arguments.length == 1
-    true
+    true if @arguments.length == 2
   end
   
   # Setup the arguments
   def process_arguments
-    # TO DO - place in local vars, etc
+    @options.host = @arguments[0]
+    @options.repo_id = @arguments[1]
   end
   
   def output_help
@@ -136,7 +136,7 @@ BANNER
   end
   
   def output_usage
-    puts @options
+    puts @opts
     #RDoc::usage('usage') # gets usage from comments above
   end
   
