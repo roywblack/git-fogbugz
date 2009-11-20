@@ -3,6 +3,17 @@
 This is a program to process the input received by the git 
 post-receive hook from git-receive-pack.
 
+== Installation
+If you are not set up for gemcutter.org yet
+
+   gem install gemcutter
+   gem tumble
+   gem install git-fogbuz
+
+If you are
+
+   gem install git-fogbuz
+
 == Usage
 
    Usage: git-fogbugz [options] fogbugz_server fogbugz_repo_id
