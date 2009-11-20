@@ -101,8 +101,9 @@ BANNER
 
       opts.on_tail('-h', '--help')       { output_version; puts opts; exit 0 }
     end
-    opts.parse!(@arguments) rescue return false
+    @opts.parse!(@arguments) rescue return false
     process_options
+    true
   end
 
   # Performs post-parse processing on options
@@ -177,7 +178,7 @@ BANNER
       id = commit.id[0,7]
       files = commit.diffs.each do |d| 
         resp = fogbugz.get(make_url($2, '00000', id, d.a_path))
-        #puts resp.body
+        stderr.puts resp.body if @options.verbose
       end
     end
     return
