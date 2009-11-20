@@ -1,6 +1,31 @@
 = git-fogbugz
 
-Description goes here.
+This is a program to process the input received by the git 
+post-receive hook from git-receive-pack.
+
+== Usage
+
+Usage: git-fogbugz [options] fogbugz_server fogbugz_repo_id
+
+Expects standard input such as sent to the git post-receive hook.
+See http://www.kernel.org/pub/software/scm/git/docs/githooks.html#post-receive
+
+Example: git-fogbugz https://example.fogbugz.com 9 < file_with_old_new_ref_lines
+
+== Options
+
+    -p, --passthrough                Output stdin
+    -r, --repo=REPO                  Location of repository default is current dir
+    -v, --version
+    -V, --verbose
+    -q, --quiet
+    -h, --help
+
+== Todo
+
+* write tests
+* add option for php vs asp
+* support 6,1
 
 == Note on Patches/Pull Requests
  

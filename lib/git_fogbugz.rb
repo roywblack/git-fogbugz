@@ -93,7 +93,7 @@ Example: git-fogbugz https://example.fogbugz.com 9 < file_with_old_new_ref_lines
 Options are:
 BANNER
       opts.separator ""
-      opts.on_tail('-r', '--repo=REPO', "FogBugz repo id")    {|repo| @options.repo = repo }
+      opts.on_tail('-r', '--repo=REPO', "Location of repository default is current dir")    {|repo| @options.repo = repo }
       opts.on_tail('-v', '--version')    { output_version ; exit 0 }
       opts.on_tail('-V', '--verbose')    { @options.verbose = true }  
       opts.on_tail('-q', '--quiet')      { @options.quiet = true }
