@@ -34,6 +34,20 @@ If you are
     -q, --quiet
     -h, --help
 
+== FogBugz setup
+
+=== Cgit
+
+   Diff URL:
+   http://[cgitserver.example.com]/cgit/[repository_name]/diff/^FILE?id=^R2
+
+   Log URL:
+   http://[cgitserver.example.com]/cgit/[repository_name]/commit/?id=^R2
+
+=== gitweb
+TODO
+
+
 == Todo
 
 * write tests
