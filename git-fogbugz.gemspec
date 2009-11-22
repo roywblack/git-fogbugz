@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{git-fogbugz}
-  s.version = "0.1.2"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Roy W. Black"]
-  s.date = %q{2009-11-19}
+  s.date = %q{2009-11-21}
   s.default_executable = %q{git-fogbugz}
-  s.description = %q{Log git pushes to fogbugz}
+  s.description = %q{Git integretion with a FogBugz server}
   s.email = %q{roy@roywblack.com}
   s.executables = ["git-fogbugz"]
   s.extra_rdoc_files = [
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/git-fogbugz",
+     "git-fogbugz.gemspec",
      "lib/git_fogbugz.rb",
      "test/helper.rb",
      "test/test_git-fogbugz.rb"
