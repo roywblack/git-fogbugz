@@ -1,7 +1,9 @@
 = git-fogbugz
 
 This is a program to process the input received by the git 
-post-receive hook from git-receive-pack.
+post-receive hook from git-receive-pack. If finds references to
+FogBugz tickets and transmits change information to your FogBugz
+server.
 
 == Installation
 If you are not set up for gemcutter.org yet

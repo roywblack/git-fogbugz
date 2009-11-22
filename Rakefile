@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "git-fogbugz"
     gem.summary = %Q{Log git pushes to fogbugz}
-    gem.description = %Q{Log git pushes to fogbugz}
+    gem.description = %Q{Git integretion with a FogBugz server}
     gem.email = "roy@roywblack.com"
     gem.homepage = "http://github.com/roywblack/git-fogbugz"
     gem.authors = ["Roy W. Black"]
