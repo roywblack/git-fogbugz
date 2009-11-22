@@ -159,6 +159,7 @@ BANNER
     @stdin.each do |line| 
       old, new, ref = line.split
       repo.commits_between(old, new).each do |commit|
+        $stderr.puts commit.id if @options.verbose
         process_commit(commit)
       end
       $stdout.puts line if @options.passthrough
@@ -176,9 +177,19 @@ BANNER
     end
     if commit.message =~ /(bugzid|case|issue)[:\s]+(\d+)/i
       id = commit.id[0,7]
-      files = commit.diffs.each do |d| 
-        resp = fogbugz.get(make_url($2, '00000', id, d.a_path))
-        stderr.puts resp.body if @options.verbose
+      bugzid = $2
+      files = commit.diffs.each do |d|
+        url = make_url(bugzid, '00000', id, d.a_path)
+        resp = fogbugz.get(url)
+        unless resp.body =~ /OK/
+          $stderr.puts 'FAILED: ' + url
+          $stderr.puts resp.body 
+        else
+          if @options.verbose
+            $stderr.puts 'OK: ' + url
+            $stderr.puts resp.body
+          end
+        end
       end
     end
     return
