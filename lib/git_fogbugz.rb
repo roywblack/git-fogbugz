@@ -176,10 +176,11 @@ BANNER
       fogbugz.verify_mode = OpenSSL::SSL::VERIFY_NONE
     end
     if commit.message =~ /(bugzid|case|issue)[:\s]+(\d+)/i
-      id = commit.id[0,7]
+      new_id = commit.id[0,7]
+      old_id = commit.parents[0].id[0,7]
       bugzid = $2
       files = commit.diffs.each do |d|
-        url = make_url(bugzid, '00000', id, d.a_path)
+        url = make_url(bugzid, old_id, new_id, d.a_path)
         resp = fogbugz.get(url)
         unless resp.body =~ /OK/
           $stderr.puts 'FAILED: ' + url
@@ -196,7 +197,7 @@ BANNER
   end
 
   def make_url(bug_id, old, new, file)
-    "/cvsSubmit.asp?ixBug=#{bug_id}&sFile=#{file}&sPrev=#{old}&sNew=#{new}&ixRepository=#{@options.repo_id}"
+    "/cvsSubmit.asp?ixBug=#{bug_id}&sFile=#{URI.escape(file)}&sPrev=#{old}&sNew=#{new}&ixRepository=#{@options.repo_id}"
   end
 end
 

@@ -47,7 +47,12 @@ If you are
    http://[cgitserver.example.com]/cgit/[repository_name]/commit/?id=^R2
 
 === gitweb
-TODO
+
+    Diff URL:
+    https://[cgitserver.example.com]/git/gitweb.cgi?p=[repository_name];a=blobdiff;f=^FILE;hb=^R2;hpb=^R1
+
+    Log URL:
+    https://[cgitserver.example.com]/git/gitweb.cgi?p=[repository_name];a=history;f=^FILE;hb=^R2
 
 
 == Todo
